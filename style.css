@@ -1,0 +1,26 @@
+/* <!-- Bagian Ifan Sutiono --> */
+
+/* tablet */
+@media all and (max-width: 1000px) {
+}
+
+/* smartphone */
+@media all and (max-width: 670px) {
+  #jarak {
+    font-size: 24px;
+  }
+  .ball1 {
+    width: 200px;
+    height: 200px;
+  }
+  .ball2 {
+    width: 200px;
+    height: 200px;
+  }
+  .ball3 {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* <!-- /Bagian Ifan Sutiono --> */
