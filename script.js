@@ -43,7 +43,7 @@ $(document).ready(() => {
         " " +
         tahun +
         "</span>" +
-        "<span class='digital'><i class='fa-solid fa-clock'></i> " +
+        "<span class='digital'><i class='fa-solid fa-clock' style='font-size: 2rem'></i> " +
         jam +
         ":" +
         min +
