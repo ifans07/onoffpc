@@ -137,7 +137,7 @@ $(document).ready(() => {
       (saklar) => {
         if (saklar == 0) {
           $("#saklarNotif").html(
-            "<small><i class='fa-solid fa-plug-circle-xmark'></i> Sensor jarak untuk menyalakan PC Nonaktif</small>"
+            "<small class='text-white'><i class='fa-solid fa-plug-circle-xmark'></i> Sensor jarak untuk menyalakan PC Nonaktif</small>"
           );
         } else {
           $("#saklarNotif").html(
