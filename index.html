@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PC LDR</title>
+    <link rel="icon" href="img/computer.png" />
     <!-- fontawesome -->
     <link
       rel="stylesheet"
@@ -144,9 +145,15 @@
         }
         .btn-wrap {
           display: flex;
+          flex-wrap: wrap;
           padding: 12px;
           justify-content: center;
           gap: 10px;
+        }
+        .btn-flex {
+          width: 100%;
+          flex-grow: 1;
+          flex-basis: 200;
         }
         .btno {
           border: none;
@@ -172,7 +179,17 @@
           font-size: 1.5rem;
         }
         .notif {
-          margin-top: 90px;
+          margin-top: 30px;
+          text-align: left;
+          padding: 12px;
+        }
+        .non {
+          background-color: #3f3f3f;
+        }
+        .non:hover {
+          background-color: #3f3f3f;
+          color: tomato;
+          border: none;
         }
       }
     </style>
@@ -183,7 +200,9 @@
     <div class="ball3"></div>
     <div class="header">
       <div class="container d-flex justify-content-between align-items-center">
-        <div class="header-logo"><strong class="fs-4">My PC</strong></div>
+        <div class="header-logo">
+          <strong class="fs-4"><i class="fa-solid fa-desktop"></i> MyPC</strong>
+        </div>
         <div class="header-list">
           <span id="indikatorAlat">Indikator</span>
         </div>
@@ -194,10 +213,16 @@
         <h1 id="time"></h1>
         <h4 id="jarak"></h4>
         <div class="btn-wrap">
-          <span id="poweron">
-            <button id="pc" class="btno"><strong>PC</strong></button>
+          <span id="poweron" class="btn-flex">
+            <button id="pc" class="btno">
+              <strong><i class="fa-solid fa-power-off"></i> PC</strong>
+            </button>
           </span>
-          <button id="saklar" class="btno"><strong>Saklar</strong></button>
+          <span class="btn-flex">
+            <button id="saklar" class="btno">
+              <strong><i class="fa-solid fa-plug plug"></i> Saklar</strong>
+            </button>
+          </span>
         </div>
         <div class="notif">
           <div>
@@ -218,9 +243,11 @@
 
     <div class="footer fixed-bottom">
       <div class="container d-flex justify-content-between align-items-center">
-        <div class="footer-logo"><strong class="fs-4">My PC</strong></div>
+        <div class="footer-logo">
+          <strong class="fs-4"><i class="fa-solid fa-desktop"></i> MyPC</strong>
+        </div>
         <div class="footer-list">
-          <span id="indikatorAlat">Indikator</span>
+          <span id="indikatorVoltase">Indikator</span>
         </div>
       </div>
     </div>

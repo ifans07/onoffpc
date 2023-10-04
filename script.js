@@ -28,6 +28,7 @@ $(document).ready(() => {
     let sec = time.getSeconds();
     sec = sec < 10 ? "0" + sec : sec;
     let tanggal = time.getDate();
+    tanggal = tanggal < 10 ? "0" + tanggal : tanggal;
     let bulan = time.getMonth();
     let tahun = time.getFullYear();
     let hari = time.getDay();
@@ -42,7 +43,7 @@ $(document).ready(() => {
         " " +
         tahun +
         "</span>" +
-        "<span class='digital'>" +
+        "<span class='digital'><i class='fa-solid fa-clock'></i> " +
         jam +
         ":" +
         min +
@@ -63,6 +64,9 @@ $(document).ready(() => {
           );
           $("#saklar").addClass("on");
           $("#saklar").removeClass("off");
+          $(".fa-plug").addClass("fa-plug-circle-bolt");
+          $(".fa-plug").removeClass("fa-plug-circle-exclamation");
+          $(".fa-plug").removeClass("fa-plug");
         } else if (data == 1) {
           $.getJSON(
             "https://sgp1.blynk.cloud/external/api/update?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V3=0",
@@ -70,10 +74,31 @@ $(document).ready(() => {
           );
           $("#saklar").addClass("off");
           $("#saklar").removeClass("on");
+          $(".fa-plug").addClass("fa-plug-circle-exclamation");
+          $(".fa-plug").removeClass("fa-plug-circle-bolt");
+          $(".fa-plug").removeClass("fa-plug");
         }
       }
     );
   });
+
+  setInterval(() => {
+    $.getJSON(linkGetData + "&V3", (saklar) => {
+      if (saklar == 0) {
+        $("#saklar").addClass("off");
+        $("#saklar").removeClass("on");
+        $(".plug").addClass("fa-plug-circle-exclamation");
+        $(".plug").removeClass("fa-plug-circle-bolt");
+        $(".plug").removeClass("fa-plug");
+      } else {
+        $("#saklar").addClass("on");
+        $("#saklar").removeClass("off");
+        $(".plug").addClass("fa-plug-circle-bolt");
+        $(".plug").removeClass("fa-plug-circle-exclamation");
+        $(".plug").removeClass("fa-plug");
+      }
+    });
+  }, 1000);
 
   // pc on/off notif
   setInterval(() => {
@@ -82,14 +107,14 @@ $(document).ready(() => {
       (power) => {
         if (power > 0 && power < 3) {
           $("#alert").html(
-            "<small>PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
+            "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
           );
         } else {
           $("#poweron").html(
-            '<button id="pc" class="btno" disabled><strong>PC</strong></button>'
+            '<button id="pc" class="btno non" disabled><strong><i class="fa-solid fa-power-off"></i> PC</strong></button>'
           );
           $("#alert").html(
-            "<small>PC sudah dalam keadaan menyala, tombol nyalakan PC dinonaktifkan!</small>"
+            "<small><i class='fa-solid fa-plug'></i> PC sudah dalam keadaan menyala, tombol nyalakan PC dinonaktifkan!</small>"
           );
         }
       }
@@ -112,11 +137,11 @@ $(document).ready(() => {
       (saklar) => {
         if (saklar == 0) {
           $("#saklarNotif").html(
-            "<small>Sensor jarak untuk menyalakan PC Nonaktif</small>"
+            "<small><i class='fa-solid fa-plug-circle-xmark'></i> Sensor jarak untuk menyalakan PC Nonaktif</small>"
           );
         } else {
           $("#saklarNotif").html(
-            "<small>Sensor jarak untuk menyalakan PC Aktif</small>"
+            "<small><i class='fa-solid fa-plug-circle-check'></i> Sensor jarak untuk menyalakan PC Aktif</small>"
           );
         }
       }
@@ -143,9 +168,13 @@ $(document).ready(() => {
       "https://sgp1.blynk.cloud/external/api/isHardwareConnected?token=soXZJg279hW3tn231h_fE42iLqSkCGDO",
       (isHardwareConnected) => {
         if (isHardwareConnected == true) {
-          $("#indikatorAlat").html("Aktif");
+          $("#indikatorAlat").html(
+            "<strong><small><i class='fa-solid fa-wifi'></i> Aktif</small></strong>"
+          );
         } else {
-          $("#indikatorAlat").html("Nonaktif");
+          $("#indikatorAlat").html(
+            "<strong><small><i class='fa-solid fa-wifi'></i> Nonaktif</small></strong>"
+          );
         }
       }
     );
@@ -158,9 +187,16 @@ $(document).ready(() => {
   setInterval(() => {
     $.getJSON(linkGetData + "&V9", (v) => {
       if (v == 0) {
-        $("#voltase").html("<small>PC tidak terhubung ke listrik!</small>");
+        $("#voltase").html(
+          "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC tidak terhubung ke listrik!</small>"
+        );
       } else {
         $("#voltase").html(
+          "<small><strong><i class='fa-solid fa-bolt'></i> Voltase: " +
+            v +
+            "V</strong></small>"
+        );
+        $("#indikatorVoltase").html(
           "<small><strong>Voltase: " + v + "V</strong></small>"
         );
         $.getJSON(linkGetData + "&V7", (power) => {
