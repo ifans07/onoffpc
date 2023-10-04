@@ -54,32 +54,23 @@ $(document).ready(() => {
   }, 1000);
 
   $("#saklar").on("click", () => {
-    $.getJSON(
-      "https://sgp1.blynk.cloud/external/api/get?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V3",
-      (data) => {
-        if (data == 0) {
-          $.getJSON(
-            "https://sgp1.blynk.cloud/external/api/update?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V3=1",
-            () => {}
-          );
-          $("#saklar").addClass("on");
-          $("#saklar").removeClass("off");
-          $(".fa-plug").addClass("fa-plug-circle-bolt");
-          $(".fa-plug").removeClass("fa-plug-circle-exclamation");
-          $(".fa-plug").removeClass("fa-plug");
-        } else if (data == 1) {
-          $.getJSON(
-            "https://sgp1.blynk.cloud/external/api/update?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V3=0",
-            () => {}
-          );
-          $("#saklar").addClass("off");
-          $("#saklar").removeClass("on");
-          $(".fa-plug").addClass("fa-plug-circle-exclamation");
-          $(".fa-plug").removeClass("fa-plug-circle-bolt");
-          $(".fa-plug").removeClass("fa-plug");
-        }
+    $.getJSON(linkGetData + "&V3", (data) => {
+      if (data == 0) {
+        $.getJSON(linkUpdate + "&V3=1", () => {});
+        $("#saklar").addClass("on");
+        $("#saklar").removeClass("off");
+        $(".fa-plug").addClass("fa-plug-circle-bolt");
+        $(".fa-plug").removeClass("fa-plug-circle-exclamation");
+        $(".fa-plug").removeClass("fa-plug");
+      } else if (data == 1) {
+        $.getJSON(linkUpdate + "&V3=0", () => {});
+        $("#saklar").addClass("off");
+        $("#saklar").removeClass("on");
+        $(".fa-plug").addClass("fa-plug-circle-exclamation");
+        $(".fa-plug").removeClass("fa-plug-circle-bolt");
+        $(".fa-plug").removeClass("fa-plug");
       }
-    );
+    });
   });
 
   setInterval(() => {
@@ -102,62 +93,50 @@ $(document).ready(() => {
 
   // pc on/off notif
   setInterval(() => {
-    $.getJSON(
-      "https://sgp1.blynk.cloud/external/api/get?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V7",
-      (power) => {
-        if (power > 0 && power < 3) {
-          $("#alert").html(
-            "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
-          );
-        } else {
-          $("#poweron").html(
-            '<button id="pc" class="btno non" disabled><strong><i class="fa-solid fa-power-off"></i> PC</strong></button>'
-          );
-          $("#alert").html(
-            "<small><i class='fa-solid fa-plug'></i> PC sudah dalam keadaan menyala, tombol nyalakan PC dinonaktifkan!</small>"
-          );
-        }
+    $.getJSON(linkGetData + "&V7", (power) => {
+      if (power >= 0 && power < 3.5) {
+        $("#alert").html(
+          "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
+        );
+      } else {
+        $("#poweron").html(
+          '<button id="pc" class="btno non" disabled><strong><i class="fa-solid fa-power-off"></i> PC</strong></button>'
+        );
+        $("#alert").html(
+          "<small><i class='fa-solid fa-plug'></i> PC sudah dalam keadaan menyala, tombol nyalakan PC dinonaktifkan!</small>"
+        );
       }
-    );
-  }, 500);
+    });
+  }, 1000);
 
   $("#pc").on("click", () => {
-    $.getJSON(
-      "https://sgp1.blynk.cloud/external/api/update?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V1=0",
-      () => {}
-    );
+    $.getJSON(linkUpdate + "&V1=0", () => {});
   });
   // akhir pc on/off notif
 
   // saklar nyala/mati
 
   setInterval(() => {
-    $.getJSON(
-      "https://sgp1.blynk.cloud/external/api/get?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V3",
-      (saklar) => {
-        if (saklar == 0) {
-          $("#saklarNotif").html(
-            "<small class='text-white'><i class='fa-solid fa-plug-circle-xmark'></i> Sensor jarak untuk menyalakan PC Nonaktif</small>"
-          );
-        } else {
-          $("#saklarNotif").html(
-            "<small><i class='fa-solid fa-plug-circle-check'></i> Sensor jarak untuk menyalakan PC Aktif</small>"
-          );
-        }
+    $.getJSON(linkGetData + "&V3", (saklar) => {
+      if (saklar == 0) {
+        $("#saklarNotif").html(
+          "<small><i class='fa-solid fa-plug-circle-xmark'></i> Sensor jarak untuk menyalakan PC Nonaktif</small>"
+        );
+      } else {
+        $("#saklarNotif").html(
+          "<small><i class='fa-solid fa-plug-circle-check'></i> Sensor jarak untuk menyalakan PC Aktif</small>"
+        );
       }
-    );
+    });
   }, 1000);
 
   // akhir saklar nyala/mati
 
   // nilai sensor jarak
   setInterval(() => {
-    $.getJSON(
-      "https://sgp1.blynk.cloud/external/api/get?token=soXZJg279hW3tn231h_fE42iLqSkCGDO&V2",
-      (e) => {
-        $("#jarak").html("<strong>" + e + "Cm" + "</strong>");
-      }
-    );
+    $.getJSON(linkGetData + "&V2", (e) => {
+      $("#jarak").html("<strong>" + e + "Cm" + "</strong>");
+    });
   }, 500);
   // akhir nilai sensor jarak
 
