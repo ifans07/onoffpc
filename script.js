@@ -98,12 +98,18 @@ $(document).ready(() => {
         $("#alert").html(
           "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
         );
+        $("#indikatorCom").html(
+          "<strong><small><i class='fa-solid fa-computer'></i> Mati</small></strong>"
+        );
       } else {
         $("#poweron").html(
           '<button id="pc" class="btno non" disabled><strong><i class="fa-solid fa-power-off"></i> PC</strong></button>'
         );
         $("#alert").html(
           "<small><i class='fa-solid fa-plug'></i> PC sudah dalam keadaan menyala, tombol nyalakan PC dinonaktifkan!</small>"
+        );
+        $("#indikatorCom").html(
+          "<strong><small><i class='fa-solid fa-computer'></i> Nyala</small></strong>"
         );
       }
     });
@@ -173,16 +179,26 @@ $(document).ready(() => {
         $("#voltase").html(
           "<small><strong><i class='fa-solid fa-bolt'></i> Voltase: " +
             v +
-            "V</strong></small>"
+            "<sup>v</sup></strong></small>"
         );
         $("#indikatorVoltase").html(
-          "<small><strong>Voltase: " + v + "V</strong></small>"
+          "<small><strong>Voltase: " + v + "<sup>v</sup></strong></small>"
         );
         $.getJSON(linkGetData + "&V7", (power) => {
-          $("#power").html("<small>Power: " + power + "kW</small>");
+          $("#power").html("<small>Power: " + power + "<sup>kW</sup></small>");
+          $("#indikatorPower").html(
+            "<small><strong>Power: " + power + "<sup>kW</sup></strong></small>"
+          );
         });
         $.getJSON(linkGetData + "&V8", (energi) => {
-          $("#energi").html("<small>Energi: " + energi + "kWh</small>");
+          $("#energi").html(
+            "<small>Energi: " + energi + "<sup>kWh</sup></small>"
+          );
+          $("#indikatorEnergi").html(
+            "<small><strong>Energi: " +
+              energi +
+              "<sup>kWh</sup></strong></small>"
+          );
         });
       }
     });

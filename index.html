@@ -114,6 +114,10 @@
         width: 100%;
         background-color: transparent;
       }
+      .non:hover {
+        border: none;
+        background-color: tomato;
+      }
       @media all and (max-width: 670px) {
         body,
         html {
@@ -207,12 +211,13 @@
           <strong class="fs-4"><i class="fa-solid fa-desktop"></i> MyPC</strong>
         </div>
         <div class="header-list">
-          <span id="indikatorAlat">Indikator</span>
+          <span id="indikatorCom" class="p-2">Indikator</span>
+          <span id="indikatorAlat" class="p-2">Indikator</span>
         </div>
       </div>
     </div>
     <div class="wrap">
-      <div class="con">
+      <div class="con mb-5">
         <h1 id="time"></h1>
         <h4 id="jarak"></h4>
         <div class="btn-wrap">
@@ -250,7 +255,12 @@
           <strong class="fs-4"><i class="fa-solid fa-desktop"></i> MyPC</strong>
         </div>
         <div class="footer-list">
-          <span id="indikatorVoltase">Indikator</span>
+          <ul class="nav d-flex flex-column">
+            <li id="indikatorVoltase" class="nav-item">indikator</li>
+            <li id="indikatorPower" class="nav-item">indikator</li>
+            <li id="indikatorEnergi" class="nav-item">indikator</li>
+          </ul>
+          <!-- <span id="indikatorVoltase">Indikator</span> -->
         </div>
       </div>
       <hr />
