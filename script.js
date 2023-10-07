@@ -92,8 +92,8 @@ $(document).ready(() => {
   }, 1000);
 
   // pc on/off notif
-  setInterval(() => {
-    $.getJSON(linkGetData + "&V7", (power) => {
+  $.getJSON(linkGetData + "&V7", (power) => {
+    setInterval(() => {
       if (power >= 0 && power < 3.5) {
         $("#alert").html(
           "<small><i class='fa-solid fa-plug-circle-xmark'></i> PC dalam keadaan mati, silakan teken tombol nyalakan PC untuk menyalakan</small>"
@@ -112,13 +112,7 @@ $(document).ready(() => {
           "<strong><small><i class='fa-solid fa-computer'></i> Nyala</small></strong>"
         );
       }
-    });
-  }, 1000);
-
-  $.getJSON(linkGetData + "&V7", (p) => {
-    if (p >= 0 && p < 3.5) {
-      location.reload();
-    }
+    }, 1000);
   });
 
   $("#pc").on("click", () => {
