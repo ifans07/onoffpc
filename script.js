@@ -101,6 +101,7 @@ $(document).ready(() => {
         $("#indikatorCom").html(
           "<strong><small><i class='fa-solid fa-computer'></i> Mati</small></strong>"
         );
+        location.reload();
       } else {
         $("#poweron").html(
           '<button id="pc" class="btno non" disabled><strong><i class="fa-solid fa-power-off"></i> PC</strong></button>'
